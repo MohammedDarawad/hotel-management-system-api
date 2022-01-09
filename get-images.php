@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         $i = 1;
         foreach ($images as $image) {
-            $arr = array('image' => "http://10.0.2.2/".$image);
+            $arr = array('URL' => "http://10.0.2.2/".$image);
             $resultarray[] = $arr;
         }
         echo json_encode($resultarray,JSON_UNESCAPED_SLASHES);
