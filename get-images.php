@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $resultarray[] = $arr;
         }
         if ($getAllImages == 0) {
-            echo json_encode($resultarray[0], JSON_UNESCAPED_SLASHES);
+            echo json_encode(array($resultarray[0]), JSON_UNESCAPED_SLASHES);
         } else {
             echo json_encode($resultarray, JSON_UNESCAPED_SLASHES);
         }
