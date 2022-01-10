@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
 
         $i = 1;
         foreach ($images as $image) {
-            $arr = array('URL' => "http://10.0.2.2/" . $image);
+            $arr = array('URL' => "http://localhost/" . $image);
             $resultarray[] = $arr;
         }
         if ($getAllImages == 0) {
