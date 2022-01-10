@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         while ($row = mysqli_fetch_assoc($result)) {
             $resultarray[] = $row;
         }
-        echo json_encode($resultarray,JSON_UNESCAPED_SLASHES);
+        echo json_encode($resultarray);
         $conn->close();
     } else {
         die("wrong input");
