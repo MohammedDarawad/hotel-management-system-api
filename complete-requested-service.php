@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "delete from requestedservices where id=" . $id;
+    $sql = "DELETE FROM requestedservices WHERE id=" . $id;
     if ($conn->query($sql) === TRUE) {
         $response['hasError'] = false;
         $response['message'] = "Request Completed";
