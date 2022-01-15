@@ -25,6 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		}
 		echo json_encode($response);
 	} else {
+		$sql2 = "select rId from reserved where id =" . $id;
+		$result = $conn->query($sql2);
+		$row = mysqli_fetch_assoc($result);
+
+		$sql3 = "update rooms set isReserved=0 where rId=" . $row["rId"];
+		$conn->query($sql3);
+
 		$sql = "delete from reserved where id=" . $id;
 		if ($conn->query($sql) === TRUE) {
 			$response['hasError'] = false;
