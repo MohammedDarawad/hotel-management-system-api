@@ -1,5 +1,4 @@
 <?php
-    echo "Omar Twafshah";
 	$firstdate = "";
 	$Seconddate = "";
 	if(isset($_GET['firstdate']) &&isset($_GET['Seconddate']) ){
@@ -24,7 +23,7 @@
 		if ($result->num_rows > 0) {
 			// output data of each row
 			for($x=0;$x<$arrlength;$x++){
-				$row = $result->fetch_assoc()
+				$row = $result->fetch_assoc();
 				$data[$x]= $row["rId"];
 			}
 			
@@ -40,7 +39,7 @@
 			$data2 = array();
 			if ($result->num_rows > 0) {
 				for($x=0;$x<$arrlength;$x++){
-					$row = $result->fetch_assoc()
+					$row = $result->fetch_assoc();
 					$data2[$x]= $row["rId"];
 				}
 			}
@@ -62,17 +61,5 @@
 			}
 			
 		}
-		
 		$conn->close();
-
-		
-		
-		
 	}
-	
-	
-
-
-
-
-?>
