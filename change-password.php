@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['emailAddress']) && isset($_POST['oldPassword'])  && isset($_POST['newPassword'])) {
-        $emailAddress = $_POST['emailAddress'];
+    if (isset($_POST['uId']) && isset($_POST['oldPassword'])  && isset($_POST['newPassword'])) {
+        $uId = $_POST['uId'];
         $oldPassword = $_POST['oldPassword'];
         $newPassword = $_POST['newPassword'];
 
@@ -17,12 +17,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         $response = array();
 
-        $sql = "select * from users where emailaddress='" . $emailAddress . "' and password=md5('" . $oldPassword . "')";
+        $sql = "select * from users where uId=" . $uId . " and password=md5('" . $oldPassword . "')";
         $result = $conn->query($sql);
         $row = mysqli_fetch_assoc($result);
         if (mysqli_num_rows($result) == 1) {
 
-            $sql2 = "update users set password=md5('" . $newPassword . "') where emailAddress='" . $emailAddress . "'";
+            $sql2 = "update users set password=md5('" . $newPassword . "') where uId=" . $uId;
             $conn->query($sql2);
 
             $response['hasError'] = false;
