@@ -55,15 +55,16 @@ if (!empty($firstdate) && !empty($Seconddate)) {
 		if ($current == $data2[$x] && $found == 0) {
 			$found = 1;
 		} else if ($current != $data2[$x]) {
-			$arr = array('rId' => $current);
-			$finalArray[] = $arr;
+			$sql = "select rId,floor,price from rooms where rId=" . $current;
+			$result = $conn->query($sql);
+			$row = mysqli_fetch_assoc($result);
+			echo json_encode($row);
 			$j = $j + 1;
 			$current = $data2[$x];
 			$found = 0;
 		}
 	}
 
-	echo json_encode($finalArray);
 
 	$conn->close();
 }
