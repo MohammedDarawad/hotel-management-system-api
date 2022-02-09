@@ -6,7 +6,7 @@
 		$floor = isset($_POST['floor']) ? $_POST['floor'] : "";
 		$type = isset($_POST['type']) ? $_POST['type'] : "";
 		$capacity = isset($_POST['capacity']) ? $_POST['capacity'] : "";
-
+        $price = isset($_POST['price']) ? $_POST['price'] : "";
 
 		$server_name = "localhost";
 		$username = "root";
@@ -19,7 +19,7 @@
 			die("Connection failed: " . $conn->connect_error);
 		} 
 		
-		$sql = "insert into rooms values (NULL, " . $floor . "," . 0 . ",'" . $type . "'," . $capacity . ")";
+		$sql = "insert into rooms values (NULL, " . $floor . "," . 0 . ",'" . $type . "'," . $capacity . "," . $price .")";
 		if ($conn->query($sql) === TRUE) {
 			$response['error'] = false;
 			$response['message'] = "Room Added successfully!";
