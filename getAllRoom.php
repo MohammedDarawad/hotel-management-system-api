@@ -57,7 +57,8 @@ if (!empty($firstdate) && !empty($Seconddate)) {
 			$sql = "select rId,floor,price from rooms where rId=" . $current;
 			$result = $conn->query($sql);
 			$row = mysqli_fetch_assoc($result);
-			echo json_encode($row);
+			$finalArray[] = $row;
+			//echo json_encode($row);
 			$current = $data2[$x];
 			$found = 0;
 		}
@@ -66,7 +67,8 @@ if (!empty($firstdate) && !empty($Seconddate)) {
 	$sql = "select rId,floor,price from rooms where rId=" . $current;
 	$result = $conn->query($sql);
 	$row = mysqli_fetch_assoc($result);
-	echo json_encode($row);
+	$finalArray[] = $row;
+	echo json_encode($finalArray);
 
 
 	$conn->close();
