@@ -15,41 +15,45 @@ if (!empty($firstdate) && !empty($Seconddate)) {
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-	$sql = "select rId from reserved where startDate <= '" . $firstdate . "' AND endDate >= '" . $Seconddate . "'";
+	$sql = "select rId from reserved where startDate BETWEEN '" . $firstdate . "' AND  '" . $Seconddate . "'"  ;
 
 	$result = $conn->query($sql);
 	$arrlength = $result->num_rows;
 	$data = array();
 	if ($result->num_rows > 0) {
-		// output data of each row
+		
 		for ($x = 0; $x < $arrlength; $x++) {
-			$row = $result->fetch_assoc();
-			$data[$x] = $row["rId"];
+			$row = mysqli_fetch_assoc($result);
+			$data[] = $row["rId"];
 		}
 	} else {
-		echo "no room";
-		exit;
-	}
-
-	for ($x = 0; $x < $arrlength; $x++) {
-		$sql = "select rId from rooms where rId != '" . $data[$x] . "'";
+		$finalArray = array();
+		$sql = "select rId,floor,price from rooms ";
 		$result = $conn->query($sql);
 		$arrlength = $result->num_rows;
-		$data2 = array();
-		if ($result->num_rows > 0) {
-			for ($x = 0; $x < $arrlength; $x++) {
-				$row = $result->fetch_assoc();
-				$data2[$x] = $row["rId"];
-			}
+		for ($x = 0; $x < $arrlength; $x++) {
+			$row = mysqli_fetch_assoc($result);
+			$finalArray[] = $row;
+		}
+		echo json_encode($finalArray);
+		exit ;
+	}
+	$mysqlData = "select rId from rooms where rId != '" . $data[0] ;
+	$data2 = array();
+	for ($x = 1; $x < $arrlength; $x++) {
+		$mysqlData.=  "'AND rId != '". $data[$x];
+	}
+	$mysqlData.= "'";
+	$result = $conn->query($mysqlData);
+	if ($result->num_rows > 0) {
+		while($row = $result->fetch_assoc()) {
+			$data2[]= $row["rId"];
 		}
 	}
-
 	$arrlength = count($data2);
 	$current = $data2[0];
 	$found = 0;
-
 	$finalArray = array();
-
 	for ($x = 0; $x < $arrlength; $x++) {
 		if ($current == $data2[$x] && $found == 0) {
 			$found = 1;
@@ -58,7 +62,6 @@ if (!empty($firstdate) && !empty($Seconddate)) {
 			$result = $conn->query($sql);
 			$row = mysqli_fetch_assoc($result);
 			$finalArray[] = $row;
-			//echo json_encode($row);
 			$current = $data2[$x];
 			$found = 0;
 		}
