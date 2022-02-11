@@ -9,7 +9,8 @@
 		$server_name = "localhost";
 		$username = "root";
 		$passwordss = "";
-		$dbname = "hotel-management-system";		$response  = array();
+		$dbname = "hotel-management-system";
+		$response  = array();
 		
 
 		
@@ -21,11 +22,17 @@
 		$sql = "insert into reserved (rId ,uId ,startDate,endDate,isCheckedIn ) values ( '" . $rId . "','" . $uId . "','" . $startDate . "','" . $endDate . "'," . $isCheckedIn .")";
 		
 		if ($conn->query($sql) === TRUE) {
-			echo json_encode("Reserved successfully!");
+			$response['error'] = false;
+			$response['message'] = "Reserved successfully!";
 		} else {
-			echo json_encode("ERROR");			
+			$response['error'] = true;
+			$response['message'] = "Error, " . $conn->error;			
 		}
-	}  
+		echo json_encode($response);
+
+
+
+	}  
 
 
 
